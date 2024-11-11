@@ -1,3 +1,11 @@
+---
+title: 'Java 异步编程 (5 种异步实现方式详解)'
+tags: [java,技术笔记]
+published: true
+---
+
+
+
 同步操作如果遇到一个耗时的方法，需要阻塞等待，那么我们有没有办法解决呢？让它异步执行，下面我会详解异步及实现[@mikechen](https://mikechen.cc/)
 
 目录

@@ -1,3 +1,9 @@
+---
+title: 'cb() never called!的解决办法'
+tags: [java,技术笔记,呆头呆脑]
+published: true
+---
+
 ##  cb() never called!的解决办法
 
 ```bash
@@ -15,10 +21,6 @@ npm ERR!     /Users/geekchief/.npm/_logs/2021-07-12T06_56_29_399Z-debug.log
 github的issue的讨论：https://github.com/npm/cli/issues/417
 
 错误的意思是，npm程序执行到未知流程节点中然后没有调用回调通知任务已执行完成，导致进程异常退出，据官方说法他们也没有太好的方式解决，不过网上的东西大多数不靠谱，但是有挺多人用的淘宝源，出这个错误的概率会大大提高。
-
-
-
-
 
 
 
