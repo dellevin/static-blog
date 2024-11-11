@@ -1,5 +1,5 @@
 // main.js
-import { createApp } from 'vue'; // 确保导入 createApp
+import {createApp} from 'vue'; // 确保导入 createApp
 import App from './App.vue';
 import router from './router';
 
