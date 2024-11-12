@@ -100,7 +100,7 @@ import postInfo from '@/utils/postInfo.json'
 import websiteConfig from '@/utils/websiteConfig.json'
 import {ref, computed} from 'vue'
 
-
+// markdown文件数据
 const postsList = postInfo.markdownList
 // 当前页
 const currentPage = ref(1)
@@ -126,13 +126,23 @@ const goToPage = () => {
     alert(`输入有误，请输入数值 1 ~ ${totalPages.value} `)
   }
 }
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
 // 设置分页数据（上一页和下一页）
 const pagination = ref({
   prev: () => {
-    if (currentPage.value > 1) currentPage.value -= 1
+    if (currentPage.value > 1){
+      currentPage.value -= 1
+      scrollToTop()
+    }
   },
   next: () => {
-    if (currentPage.value < Math.ceil(postsList.length / pageSize)) currentPage.value += 1
+    if (currentPage.value < Math.ceil(postsList.length / pageSize)){
+      currentPage.value += 1
+      scrollToTop();
+    }
   },
 })
 </script>

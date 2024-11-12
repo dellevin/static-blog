@@ -21,6 +21,7 @@
           </h1>
 
           <div class="navbar weaklink">
+
             <div class="normal_nav">
               <div class="bitcron_nav_container">
                 <div class="bitcron_nav">
@@ -34,24 +35,67 @@
                     </ul>
                   </nav>
                   <!--搜索框-->
-<!--                  <div style="float:right;margin-top:1em">-->
-<!--                    <form id="gridea-search-form" data-update="1578893743252" action="/search/index.html">-->
-<!--                      <input class="search-input" autocomplete="off" spellcheck="false" name="q"-->
-<!--                             placeholder="Search..."/>-->
-<!--                    </form>-->
-<!--                  </div>-->
+                  <div style="float:right;margin-top:1em">
+                    <form id="gridea-search-form" data-update="1578893743252" >
+                      <input class="search-input" autocomplete="off" spellcheck="false" name="q"
+                                               placeholder="Search..."/>
+                    </form>
+                  </div>
                   <!--亮暗切换-->
                   <div style="margin-left:0.5em;margin-top:1.2em">
-                    <input id="switch_default" @click="toggleDarkMode" type="checkbox"  :checked="isDarkMode" class="switch_default"/>
+                    <input id="switch_default" @click="toggleDarkMode" type="checkbox" :checked="isDarkMode"
+                           class="switch_default"/>
                     <label for="switch_default" class="toggleBtn"></label>
                   </div>
                 </div>
               </div>
             </div>
 
-
+            <div class="hamberger" @click="btnToggle">
+              <i class="fa fa-list"></i>
+            </div>
           </div>
         </div>
+      </div>
+
+      <!-- 隐藏导航栏 -->
+      <div id="hn" class="hidden_nav animated fadeInDown" v-if="isNavVisible">
+        <div class="bitcron_nav_container">
+          <div class="bitcron_nav">
+            <nav class="mixed_site_nav_wrap site_nav_wrap">
+              <ul class="mixed_site_nav site_nav sm sm-base">
+                <li v-for="menu in webSiteConfig.headerMenuConfig" :key="menu.link">
+                  <a :href="menu.link" class="selected active current nav__item">
+                    {{ menu.name }}
+                  </a>
+                </li>
+              </ul>
+              <div class="clear clear_nav_inline_end"></div>
+            </nav>
+          </div>
+          <div class="clear clear_nav_end"></div>
+        </div>
+
+        <div style="display:flex;justify-content:center;text-align:center">
+          <div style="margin-right: 0.5em">
+            <form id="gridea-search-form" >
+              <input
+                  class="search-input"
+                  autocomplete="off"
+                  spellcheck="false"
+                  name="q"
+                  placeholder="Search..."
+              />
+            </form>
+          </div>
+          <!--亮暗切换-->
+          <div style="margin-left:0.5em; justify-content: center; align-items: center;">
+            <input id="switch_default" @click="toggleDarkMode" type="checkbox" :checked="isDarkMode"
+                   class="switch_default"/>
+            <label for="switch_default" class="toggleBtn"></label>
+          </div>
+        </div>
+
       </div>
 
 
@@ -82,7 +126,7 @@ onMounted(() => {
       .find(row => row.startsWith('darkmode='))
       ?.split('=')[1];
 
-  console.log(darkModeCookie)
+  // console.log(darkModeCookie)
   if (darkModeCookie === "enable" ||
       (darkModeCookie !== "disable" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
     isDarkMode.value = true;
@@ -90,7 +134,15 @@ onMounted(() => {
   }
 });
 
+const isNavVisible = ref(false);  // 新增变量控制导航栏显示
+const btnToggle = () => {
+  isNavVisible.value = !isNavVisible.value;
+  console.log(isNavVisible.value)
+};
 
+const mobileBtn = () => {
+
+}
 </script>
 
 <style scoped>
@@ -106,4 +158,19 @@ onMounted(() => {
 .bitcron_nav {
   display: flex;
 }
+
+.normal_nav {
+  display: none;
+}
+
+.normal_nav.visible {
+  display: block; /* 切换显示 */
+}
+
+@media (min-width: 768px) {
+  .normal_nav {
+    display: block; /* 大屏幕始终显示 */
+  }
+}
+
 </style>

@@ -2,7 +2,6 @@
 import {createRouter, createWebHistory} from 'vue-router';
 import Home from '@/pages/Home.vue';
 import Archive from '@/pages/Archive.vue';
-import Tags from '@/pages/Tags.vue';
 import Album from '@/pages/Album.vue';
 import Links from '@/pages/Links.vue';
 import About from '@/pages/About.vue';
@@ -24,8 +23,8 @@ const routes = [
     },
     // 标签
     {
-        path: '/tags', name: 'Tags', component: Tags, meta: {
-            title: '标签'
+        path: '/category', name: 'CategoryView', component: CategoryView, meta: {
+            title: '分类'
         }
     },
     // 相册
@@ -45,10 +44,6 @@ const routes = [
         path: '/about', name: 'About', component: About, meta: {
             title: '关于'
         }
-    },
-    // 分类路由
-    {
-        path: '/category/:category', name: 'CategoryView', component: CategoryView
     },
     // 文章详情路由
     {

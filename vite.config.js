@@ -7,7 +7,8 @@ import { markdownCountPlugin } from './src/utils/constructPost.js';
 
 
 export default defineConfig({
-  plugins: [vue(), vueDevTools(), markdownCountPlugin()],
+  // plugins: [vue(), vueDevTools(), markdownCountPlugin()],
+  plugins: [vue(), markdownCountPlugin()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

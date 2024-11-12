@@ -1,7 +1,7 @@
 {
   "pageConfig":{
     "postPageSize": 10,
-    "archivesPageSize": 20
+    "archivesPageSize": 10
   },
   "config": {
     "githubName": "dellevin",
@@ -18,8 +18,8 @@
       "link": "/archive"
     },
     {
-      "name": "标签",
-      "link": "/tags"
+      "name": "分类",
+      "link": "/category"
     },
     {
       "name": "相册",

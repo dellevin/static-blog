@@ -1,8 +1,21 @@
-# static-blog
+# static-blog 静态博客构建
 
-This template should help get you started developing with Vue 3 in Vite.
+## 介绍
+主要是通过vue编写界面构建主界面并发布。只需要在public里面的note文件夹里面写markdown就可以。可以让我们更加专注于笔记的编写。
+
+**网站设置:** utils/websiteConfig.json
+
+**markdown解析:** utils/constructPost.js
+
+**markdown路径:** utils/postInfo.json
+
+---
+
+技术栈：vue3+vite5
 
 图标：https://fontawesome.com/v4/icons/
+
+---
 
 ## Project Setup
 
@@ -21,3 +34,6 @@ npm run dev
 ```sh
 npm run build
 ```
+
+
+
