@@ -147,7 +147,7 @@ const mobileBtn = () => {
 
 <style scoped>
 .progress {
-  background: linear-gradient(to right, #87ceeb var(--scroll), transparent 0);
+  //background: linear-gradient(to right, #87ceeb var(--scroll), transparent 0);
   background-repeat: no-repeat;
   position: fixed;
   width: 100%;
