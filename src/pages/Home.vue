@@ -6,7 +6,7 @@
           <div class="round-shape-one"></div>
           <!-- 循环渲染帖子 -->
           <div
-              v-for="(post, index) in posts"
+              v-for="(post, index) in paginatedPosts"
               :key="index"
               class="post"
           >
@@ -43,20 +43,49 @@
           <div class="round-shape-one"></div>
           <div class="paginator pager pagination">
             <div class="paginator_container pagination_container">
-              <a
-                  v-if="pagination.prev"
-                  :href="pagination.prev"
-                  class="btn pre newer-posts newer_posts"
-              >
-                Newer Posts
-              </a>
-              <a
-                  v-if="pagination.next"
-                  :href="pagination.next"
-                  class="btn next older-posts older_posts"
-              >
-                Older Posts
-              </a>
+              <div class="bottom-page">
+                <!-- 上一页 -->
+                <a
+                    v-if="currentPage > 1"
+                    @click.prevent="pagination.prev"
+                    class="btn pre newer-posts newer_posts"
+                    href="#"
+                >
+                  Newer Posts
+                </a>
+                <a v-else class="btn pre newer-posts newer_posts" href="#" > </a>
+
+                <!-- 跳转区域 -->
+                <div class="center-section">
+                  <a class="page-info">
+                    Page {{ currentPage }} of {{ totalPages }}
+                  </a>
+                  <input
+                      v-model="jumpPage"
+                      type="number"
+                      min="1"
+                      :max="totalPages"
+                      class="page-jump-input"
+                  />
+                  <a @click="goToPage" class="btn go-to-page">
+                    Go
+                  </a>
+                </div>
+
+                <!-- 下一页 -->
+                <a
+                    v-if="currentPage < Math.ceil(postsList.length / pageSize)"
+                    @click.prevent="pagination.next"
+                    class="btn next older-posts older_posts"
+                    href="#"
+                >
+                  Older Posts
+                </a>
+                <a v-else class="btn pre newer-posts newer_posts" href="#" > </a>
+
+              </div>
+
+
               <div style="clear: both; height: 0;"></div>
             </div>
           </div>
@@ -67,36 +96,115 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import postInfo from '@/utils/postInfo.json'
+import websiteConfig from '@/utils/websiteConfig.json'
+import {ref, computed} from 'vue'
 
-// 示例帖子数据
-const posts = ref([
-  {
-    link: '#',
-    title: '示例文章标题',
-    abstract: '这是文章摘要内容。',
-    dateFormat: '2024-11-11',
-    tags: [
-      {name: '标签1', link: '#'},
-      {name: '标签2', link: '#'},
-    ],
-    stats: {
-      words: 1200,
-      text: '5 分钟前',
-    },
-  },
-  // 其他帖子数据
-])
 
-// 示例分页数据
+const postsList = postInfo.markdownList
+// 当前页
+const currentPage = ref(1)
+// 一页显示条数
+const pageSize = websiteConfig.pageConfig.postPageSize
+const jumpPage = ref('')
+// 总页数计算
+const totalPages = computed(() => Math.ceil(postsList.length / pageSize))
+
+// 计算当前页的帖子列表
+const paginatedPosts = computed(() => {
+  const start = (currentPage.value - 1) * pageSize
+  const end = start + pageSize
+  return postsList.slice(start, end)
+})
+// 跳转到xx页
+const goToPage = () => {
+  const targetPage = Number(jumpPage.value)
+  if (targetPage >= 1 && targetPage <= totalPages.value) {
+    currentPage.value = targetPage
+    jumpPage.value = '' // 清空输入框
+  } else {
+    alert(`输入有误，请输入数值 1 ~ ${totalPages.value} `)
+  }
+}
+// 设置分页数据（上一页和下一页）
 const pagination = ref({
-  prev: '#',
-  next: '#',
+  prev: () => {
+    if (currentPage.value > 1) currentPage.value -= 1
+  },
+  next: () => {
+    if (currentPage.value < Math.ceil(postsList.length / pageSize)) currentPage.value += 1
+  },
 })
 </script>
 
 <style scoped lang="less">
-.main {
-  /* 添加你的样式 */
+.bottom-page {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.bottom-page.center-align {
+  justify-content: center;
+}
+
+.newer-posts {
+  margin-right: auto;
+}
+
+.older-posts {
+  margin-left: auto;
+}
+
+.center-section {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 控制元素之间的间距 */
+}
+
+//.page-jump-input {
+//  width: 60px;
+//  text-align: center;
+//}
+.go-to-page {
+  padding: 3px 8px;
+}
+.go-to-page:hover {
+  cursor: pointer;
+  padding: 3px 8px;
+}
+.page-jump-input {
+  width: 50px;
+  height: 15px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 4px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* 鼠标悬停效果 */
+.page-jump-input:hover {
+  border-color: #bbb;
+}
+
+/* 聚焦效果 */
+.page-jump-input:focus {
+  border-color: #007bff; /* 边框颜色 */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* 聚焦阴影效果 */
+}
+
+/* 禁用鼠标滚轮更改数值 */
+.page-jump-input::-webkit-outer-spin-button,
+.page-jump-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.page-jump-input[type="number"] {
+  -moz-appearance: textfield; /* Firefox 浏览器 */
 }
 </style>

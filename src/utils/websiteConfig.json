@@ -1,10 +1,12 @@
 {
+  "pageConfig":{
+    "postPageSize": 10,
+    "archivesPageSize": 20
+  },
   "config": {
     "githubName": "dellevin",
     "siteName": "Del Levin‘s blog",
-    "siteDescription": "望山叹高，登愈艰。入世哀难，伤无泪。",
-    "postPageSize": 10,
-    "archivesPageSize": 20
+    "siteDescription": "望山叹高，登愈艰。入世哀难，伤无泪。"
   },
   "headerMenuConfig": [
     {
