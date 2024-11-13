@@ -66,6 +66,7 @@
                       min="1"
                       :max="totalPages"
                       class="page-jump-input"
+                      @keyup.enter="goToPage()"
                   />
                   <a @click="goToPage" class="btn go-to-page">
                     Go

@@ -1,7 +1,7 @@
 {
   "pageConfig":{
     "postPageSize": 10,
-    "archivesPageSize": 10
+    "archivesPageSize": 20
   },
   "config": {
     "githubName": "dellevin",

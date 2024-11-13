@@ -18,7 +18,7 @@
 
       <div class="copyright" id="copyright">
         {{ webSiteConfig.footerConfig.footerInfo }}
-        Copyright © 2020-{{ nowYear() }}
+        | Copyright © 2020-{{ nowYear() }}
         <a :href="webSiteConfig.footerConfig.domain" style="margin: 0;">{{ webSiteConfig.footerConfig.siteName }}</a>.
       </div>
 
