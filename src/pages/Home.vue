@@ -83,9 +83,7 @@
                   Older Posts
                 </a>
                 <a v-else class="btn pre newer-posts newer_posts" href="#" > </a>
-
               </div>
-
 
               <div style="clear: both; height: 0;"></div>
             </div>

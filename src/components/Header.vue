@@ -15,22 +15,28 @@
             <img alt="logo" style="display:inline-block;" src="../assets/logo.png"/>
           </a>
           <h1 :title="webSiteConfig.config.siteName" class="weaklink">
-            <a href="/">
+<!--            <a href="/">-->
+<!--              {{ webSiteConfig.config.siteName }}-->
+<!--            </a>-->
+            <router-link to="/">
               {{ webSiteConfig.config.siteName }}
-            </a>
+            </router-link>
           </h1>
 
           <div class="navbar weaklink">
 
-            <div class="normal_nav">
+            <div class="normal_nav" ref="normalNavRef">
               <div class="bitcron_nav_container">
                 <div class="bitcron_nav">
                   <nav class="mixed_site_nav_wrap site_nav_wrap">
                     <ul class="mixed_site_nav site_nav sm sm-base">
                       <li v-for="menu in webSiteConfig.headerMenuConfig" :key="menu.link">
-                        <a :href="menu.link" class="selected active current nav__item">
+<!--                        <a :href="menu.link" class="selected active current nav__item">-->
+<!--                          {{ menu.name }}-->
+<!--                        </a>-->
+                        <router-link :to="menu.link" class="selected active current nav__item">
                           {{ menu.name }}
-                        </a>
+                        </router-link>
                       </li>
                     </ul>
                   </nav>
@@ -51,7 +57,7 @@
               </div>
             </div>
 
-            <div class="hamberger" @click="btnToggle">
+            <div class="hamberger" @click="btnToggle" ref="hambergerRef">
               <i class="fa fa-list"></i>
             </div>
           </div>
@@ -65,9 +71,12 @@
             <nav class="mixed_site_nav_wrap site_nav_wrap">
               <ul class="mixed_site_nav site_nav sm sm-base">
                 <li v-for="menu in webSiteConfig.headerMenuConfig" :key="menu.link">
-                  <a :href="menu.link" class="selected active current nav__item">
+<!--                  <a :href="menu.link" class="selected active current nav__item">-->
+<!--                    {{ menu.name }}-->
+<!--                  </a>-->
+                  <router-link :to="menu.link" class="selected active current nav__item">
                     {{ menu.name }}
-                  </a>
+                  </router-link>
                 </li>
               </ul>
               <div class="clear clear_nav_inline_end"></div>
@@ -106,7 +115,7 @@
 <script setup>
 import webSiteConfig from '@/utils/websiteConfig.json'
 
-import {ref, onMounted} from 'vue';
+import {ref, onMounted , watch } from 'vue';
 
 const isDarkMode = ref(false);
 const toggleDarkMode = () => {
@@ -135,14 +144,14 @@ onMounted(() => {
 });
 
 const isNavVisible = ref(false);  // 新增变量控制导航栏显示
+const normalNavRef = ref(null);
+const hambergerRef = ref(null);
 const btnToggle = () => {
   isNavVisible.value = !isNavVisible.value;
-  console.log(isNavVisible.value)
+  // console.log(isNavVisible.value)
 };
 
-const mobileBtn = () => {
 
-}
 </script>
 
 <style scoped>
