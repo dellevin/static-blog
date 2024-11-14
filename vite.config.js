@@ -5,7 +5,6 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import { markdownCountPlugin } from './src/utils/constructPost.js';
 
-
 export default defineConfig({
   // plugins: [vue(), vueDevTools(), markdownCountPlugin()],
   plugins: [vue(), markdownCountPlugin()],

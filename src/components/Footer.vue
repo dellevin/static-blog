@@ -1,5 +1,5 @@
 <template>
-  <a id="scrollUp" href="#" style="position: fixed; z-index: 2147483647; display: block;"></a>
+<!--  <a id="scrollUp" href="#" style="position: fixed; z-index: 2147483647; display: block;"></a>-->
   <div class="footer animated fadeInDown">
     <div class="site_footer">
       <div class="mysocials">

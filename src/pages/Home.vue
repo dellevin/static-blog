@@ -12,11 +12,16 @@
           >
 
             <div class="post_title weaklink">
-              <h2><a :href="post.link">{{ post.title }}</a></h2>
+              <h2>
+<!--                <router-link :to="`/category/${getCategoryFromLink(post.link)}`">-->
+                <router-link :to="`/postView/${encodeURIComponent(post.link.replace('.md', ''))}`">
+                  {{ post.title }}
+                </router-link>
+              </h2>
             </div>
             <div class="post_content markdown">
               <div class="p_part">
-                <p>{{ post.abstract }}</p>
+                <p>{{ post.abstract.slice(0, 100) + '...' }}</p>
               </div>
             </div>
             <div class="post_footer">
@@ -99,6 +104,14 @@ import postInfo from '@/utils/postInfo.json'
 import websiteConfig from '@/utils/websiteConfig.json'
 import {ref, computed} from 'vue'
 
+const getCategoryFromLink = (linker) => {
+
+  // const link = linker.replace('.md', '')
+  // console.log(link)
+  const parts = linker.split('/')
+  // console.log(parts[0])
+  return parts[0]
+}
 // markdown文件数据
 const postsList = postInfo.markdownList
 // 当前页
@@ -121,6 +134,7 @@ const goToPage = () => {
   if (targetPage >= 1 && targetPage <= totalPages.value) {
     currentPage.value = targetPage
     jumpPage.value = '' // 清空输入框
+    scrollToTop();
   } else {
     alert(`输入有误，请输入数值 1 ~ ${totalPages.value} `)
   }
@@ -172,10 +186,6 @@ const pagination = ref({
   gap: 8px; /* 控制元素之间的间距 */
 }
 
-//.page-jump-input {
-//  width: 60px;
-//  text-align: center;
-//}
 .go-to-page {
   padding: 3px 8px;
 }

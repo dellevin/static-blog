@@ -45,7 +45,8 @@ function generateMarkdownList(dirPath) {
                 markdownList.push({
                     link: path.relative(dirPath, fullPath).replace(/\\/g, '/'),
                     title,
-                    abstract: content.slice(0, 100) + '...', // 摘要取前100字符
+                    abstract: content, // 摘要取前100字符
+                    // content,
                     dateFormat,
                     changeTime,
                     tags,

@@ -47,7 +47,9 @@ const routes = [
     },
     // 文章详情路由
     {
-        path: '/category/:category/:post', name: 'PostView', component: PostView
+        path: '/postView/:post',
+        name: 'PostView',
+        component: PostView
     },
 ];
 
