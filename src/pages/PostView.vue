@@ -30,7 +30,6 @@
                style="margin-right: 15px">{{ languageLabel }}</a>
           </section>
 
-
           <div style="display: flex">
             <div class="md_block" id="md_block">
               <div class="round-shape-one"></div>
@@ -124,18 +123,10 @@ onMounted(async () => {
   // 查找 postInfo 中的对应对象
   const selectedPost = postInfo.markdownList.find(item => item.link === selectLink);
   if (selectedPost) {
-    // 动态替换图片路径
-    // 动态替换图片路径
-    const baseImageUrl = `/note/${path}/assets/`;
-    // 使用正则表达式替换所有符合 ![]() 形式的图片路径
-    const abstractWithAbsolutePaths = selectedPost.abstract.replace(/!\[([^\]]+)]\(assets\/([^\)]+)\)/g, (match, altText, imagePath) => {
-      // 确保图片路径是正确的相对路径
-      const imageUrl = baseImageUrl + encodeURIComponent(imagePath);
-      return `![${altText}](${imageUrl})`;
-    });
-    // post.value = selectedPost;
-    // post.value = { ...selectedPost, abstractHtml: marked.parse(selectedPost.abstract) };
-    post.value = { ...selectedPost, abstractHtml: marked.parse(abstractWithAbsolutePaths) };
+    console.log(selectedPost)
+    // post.value = selectedPost
+    post.value = { ...selectedPost, abstractHtml: marked.parse(selectedPost.abstract) };
+    // post.value = { ...selectedPost, abstractHtml: marked.parse(abstractWithAbsolutePaths) };
   } else {
     console.error('Post not found:', selectLink);
   }
